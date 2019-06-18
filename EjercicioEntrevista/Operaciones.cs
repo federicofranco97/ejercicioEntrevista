@@ -11,6 +11,16 @@ namespace EjercicioEntrevista
     {
         List<Persona> listPersona = new List<Persona>();
 
+        public void mostrarPersonas()
+        {
+            Console.WriteLine("************");
+            foreach(Persona p in listPersona)
+            {
+                Console.WriteLine(p.ToString() + "\n");
+            }
+            Console.WriteLine("************");
+        }
+
         public int CalcularEdad(Persona p)
         {
             String[] splitEdad = p._Dob.Split('/');
@@ -49,10 +59,7 @@ namespace EjercicioEntrevista
             }
             Boolean casado = pedirMaritalStatus();
             listPersona.Add(new Persona(nombre, apellido, fechaNac, casado));
-            Console.WriteLine();
-            Console.WriteLine("User added succesfully!");
-            Console.WriteLine(listPersona.Last().ToString());
-            Console.WriteLine();
+            Console.WriteLine("\nUser added succesfully!\n");
         }
 
         /**
