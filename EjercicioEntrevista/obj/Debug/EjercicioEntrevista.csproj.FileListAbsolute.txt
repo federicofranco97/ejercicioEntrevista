@@ -1,0 +1,7 @@
+C:\Users\Fede\Documents\ReposVisualStudio\EjercicioEntrevista\EjercicioEntrevista\bin\Debug\EjercicioEntrevista.exe.config
+C:\Users\Fede\Documents\ReposVisualStudio\EjercicioEntrevista\EjercicioEntrevista\bin\Debug\EjercicioEntrevista.exe
+C:\Users\Fede\Documents\ReposVisualStudio\EjercicioEntrevista\EjercicioEntrevista\bin\Debug\EjercicioEntrevista.pdb
+C:\Users\Fede\Documents\ReposVisualStudio\EjercicioEntrevista\EjercicioEntrevista\obj\Debug\EjercicioEntrevista.csprojAssemblyReference.cache
+C:\Users\Fede\Documents\ReposVisualStudio\EjercicioEntrevista\EjercicioEntrevista\obj\Debug\EjercicioEntrevista.csproj.CoreCompileInputs.cache
+C:\Users\Fede\Documents\ReposVisualStudio\EjercicioEntrevista\EjercicioEntrevista\obj\Debug\EjercicioEntrevista.exe
+C:\Users\Fede\Documents\ReposVisualStudio\EjercicioEntrevista\EjercicioEntrevista\obj\Debug\EjercicioEntrevista.pdb
