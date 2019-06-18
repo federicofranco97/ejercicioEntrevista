@@ -16,7 +16,7 @@ namespace EjercicioEntrevista
             Console.WriteLine("************");
             foreach(Persona p in listPersona)
             {
-                Console.WriteLine(p.ToString() + "\n");
+                Console.WriteLine(p.ToString()+"\nNumero: "+listPersona.IndexOf(p) + "\n");
             }
             Console.WriteLine("************");
         }

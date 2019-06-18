@@ -47,6 +47,7 @@ namespace EjercicioEntrevista
                     Environment.Exit(0);
                     break;
                 default:
+                    Console.WriteLine("\nInvalid choice!\n");
                     menuPrincipal();
                     break;
             }
