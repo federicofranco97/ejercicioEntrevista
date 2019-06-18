@@ -1,9 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 
 namespace EjercicioEntrevista
 {
@@ -35,6 +31,11 @@ namespace EjercicioEntrevista
             return Convert.ToInt32(currentDate[2]) - Convert.ToInt32(splitEdad[2]);
         }
 
+        public void asignarData(List<Persona> list)
+        {
+            listPersona.AddRange(list);
+        }
+
 
         /**
          * Metodo que pide y valida los datos para crear una persona, y si es menor de 16 descarta la data.
@@ -48,7 +49,7 @@ namespace EjercicioEntrevista
             if (blockearMenores(fechaNac))
             {
                 Console.WriteLine("The user you are trying to create is under the age of 16, \n" +
-                    "therefore cannot be created.");
+                    "therefore cannot be created.\n");
                 return;
             }
 
@@ -61,6 +62,21 @@ namespace EjercicioEntrevista
             listPersona.Add(new Persona(nombre, apellido, fechaNac, casado));
             Console.WriteLine("\nUser added succesfully!\n");
         }
+
+        /**
+         * Metodo que convierte la lista de personas en una lista de strings
+         */
+         public List<String> convertirPersonas()
+        {
+            List<String> listAux = new List<String>();
+            foreach(Persona p in listPersona)
+            {
+                String aux = p._FirstName + "-" + p._Surname + "-" + p._Dob + "-" + p._MaritalStatus+"*\n";
+                listAux.Add(aux);
+            }
+            return listAux;
+        }
+
 
         /**
          * Metodo que pide el estado marital
@@ -92,7 +108,7 @@ namespace EjercicioEntrevista
             String fechaNac;
             while (!validarFecha(fechaNac = Console.ReadLine()))
             {
-                Console.WriteLine("Invalid format!");
+                Console.WriteLine("Invalid format or date!");
             }
             return fechaNac;
         }
@@ -147,8 +163,8 @@ namespace EjercicioEntrevista
             {
                 if (!Char.IsDigit(c)) return false;
             }
-            if (Convert.ToInt32(aux[0]) > 31) return false;
-            if (Convert.ToInt32(aux[1]) > 12) return false;
+            if (Convert.ToInt32(aux[0]) > 31 || Convert.ToInt32(aux[0]) <1) return false;
+            if (Convert.ToInt32(aux[1]) > 12 || Convert.ToInt32(aux[0]) < 1) return false;
             if (Convert.ToInt32(aux[2]) > 2019) return false;
             if (Convert.ToInt32(aux[2]) < 1900) return false;
             return true;
@@ -202,6 +218,11 @@ namespace EjercicioEntrevista
         {
             if (ans.Equals("y") || ans.Equals("n")) return true;
             return false;
+        }
+
+        public void personasCargadas(List<Persona> list)
+        {
+            listPersona.AddRange(list);
         }
     }
 }

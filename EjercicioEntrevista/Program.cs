@@ -1,25 +1,36 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace EjercicioEntrevista
 {
     class Program
     {
         public Operaciones ops = new Operaciones();
+        public Persistencia per = new Persistencia();
         private const String add="1" ;
         private const String view="2";
         private const String modify="3";
         private const String delete="4";
         private const String exit = "5";
 
+        /**
+         * Constructor vacio para poder invocar los metodos
+         */
         public Program()
         {
            
         }
 
+        /**
+         * Trae la lista de personas de la persistencia y las agrega a la lista de personas
+         */
+        public void levantarData()
+        {
+            ops.asignarData(per.traerPersonas());
+        }
+
+        /**
+         * Metodo de menu principal que permite elegir que metodo se quiere ejecutar
+         */
         public void menuPrincipal()
         {
             Console.WriteLine("Welcome to the main menu");
@@ -35,6 +46,7 @@ namespace EjercicioEntrevista
                     break;
                 case view:
                     ops.mostrarPersonas();
+                    Console.WriteLine();
                     menuPrincipal();
                     break;
                 case modify:
@@ -44,6 +56,7 @@ namespace EjercicioEntrevista
                     menuPrincipal();
                     break;
                 case exit:
+                    per.guardarPersonas(ops.convertirPersonas());
                     Environment.Exit(0);
                     break;
                 default:
@@ -55,7 +68,10 @@ namespace EjercicioEntrevista
         static void Main(string[] args)
         {
             var prog = new Program();
+            prog.levantarData();
             prog.menuPrincipal();
+            //var p = new Persistencia();
+            //p.traerPersonas();
         }
     }
 }
