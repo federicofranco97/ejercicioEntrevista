@@ -9,6 +9,8 @@ namespace EjercicioEntrevista
 {
     class Operaciones
     {
+        List<Persona> listPersona = new List<Persona>();
+
         public int CalcularEdad(Persona p)
         {
             String[] splitEdad = p._Dob.Split('/');
@@ -23,25 +25,55 @@ namespace EjercicioEntrevista
             return Convert.ToInt32(currentDate[2]) - Convert.ToInt32(splitEdad[2]);
         }
 
+
+        /**
+         * Metodo que pide y valida los datos para crear una persona, y si es menor de 16 descarta la data.
+         * Si es menor que 18 pide confirmacion
+         * */
         public void cargarPersona()
         {
             String nombre = pedirNombre();
             String apellido = pedirApellido();
             String fechaNac = pedirFechaNac();
+            if (blockearMenores(fechaNac))
+            {
+                Console.WriteLine("The user you are trying to create is under the age of 16, \n" +
+                    "therefore cannot be created.");
+                return;
+            }
+
+            if (!autorizarMenor(fechaNac))
+            {
+                Console.WriteLine("Your parents do not authorize the creation of this profile.");
+                return;
+            }
+            Boolean casado = pedirMaritalStatus();
+            listPersona.Add(new Persona(nombre, apellido, fechaNac, casado));
+            Console.WriteLine();
+            Console.WriteLine("User added succesfully!");
+            Console.WriteLine(listPersona.Last().ToString());
+            Console.WriteLine();
         }
 
         /**
          * Metodo que pide el estado marital
          * */
-        public String pedirMaritalStatus()
+        public Boolean pedirMaritalStatus()
         {
-            Console.WriteLine("Insert date of birth as shown:\n dd/mm/yyyy");
-            String fechaNac;
-            while (!validarFecha(fechaNac = Console.ReadLine()))
+            Console.WriteLine("Insert marital status, true if married or false if single");
+            String casado;
+            while (!validarCasado(casado = Console.ReadLine()))
             {
-                Console.WriteLine("Invalid format!");
+                Console.WriteLine("Invalid input!");
             }
-            return fechaNac;
+
+            return Convert.ToBoolean(casado);
+        }
+
+        public Boolean validarCasado(String casado)
+        {
+            if (casado.Equals("true") || casado.Equals("false")) return true;
+            return false;
         }
 
         /**
@@ -91,23 +123,28 @@ namespace EjercicioEntrevista
          * */
         public Boolean validarFecha(String fechaNac)
         {
-            try
-            {
-                int operacion = Convert.ToInt32(fechaNac[0]) + 5;
-            }
-            catch (FormatException e)
-            {
-                return false;
-            }
             if (fechaNac[0].Equals(" ")) return false;
-
-            var regex = @"^([0]?[0-9]|[12][0-9]|[3][01])[./-]([0]?[1-9]|[1][0-2])[./-]([0-9]{4}|[0-9]{2})$";
-            var match = Regex.Match(fechaNac, regex, RegexOptions.IgnoreCase);
-            if (!match.Success)
+            if (fechaNac.Length != 10) return false;
+            //Regex regex = new Regex(@"(((0|1)[0-9]|2[0-9]|3[0-1])\/(0[1-9]|1[0-2])\/((19|20)\d\d))$");
+            String[] aux = fechaNac.Split('/');
+            if (aux[0].Length != 2 || aux[1].Length != 2 || aux[2].Length != 4) return false;
+            foreach(char c in aux[0])
             {
-                return true;
+                if (!Char.IsDigit(c)) return false;
             }
-            return false;
+            foreach (char c in aux[1])
+            {
+                if (!Char.IsDigit(c)) return false;
+            }
+            foreach (char c in aux[2])
+            {
+                if (!Char.IsDigit(c)) return false;
+            }
+            if (Convert.ToInt32(aux[0]) > 31) return false;
+            if (Convert.ToInt32(aux[1]) > 12) return false;
+            if (Convert.ToInt32(aux[2]) > 2019) return false;
+            if (Convert.ToInt32(aux[2]) < 1900) return false;
+            return true;
         }
 
 
@@ -116,17 +153,12 @@ namespace EjercicioEntrevista
          * */
         public Boolean validarNombre(String nombre)
         {
-            try
-            {
-                int operacion=Convert.ToInt32(nombre[0])+5;
-            }
-            catch (FormatException e)
-            {
-                return false;
-            }
+
+            if (Char.IsDigit(nombre[0])) return false;
+            if (nombre[0].Equals(' ')) return false;
             foreach (char c in nombre)
             {
-                if (!c.Equals("") || !c.Equals(" "))
+                if (!c.Equals(' '))
                 {
                     return true;
                 }
@@ -141,6 +173,28 @@ namespace EjercicioEntrevista
         {
             int edad = CalcularEdad(fechaNac);
             return edad < 16;
+        }
+
+        public Boolean autorizarMenor(String fechaNac)
+        {
+            int edad = CalcularEdad(fechaNac);
+            if (edad < 18)
+            {
+                Console.WriteLine("The user you are trying to create is underage, do your parents confirm?\ny/n");
+                String answer;
+                if (!validarAns(answer = Console.ReadLine()))
+                {
+                    Console.WriteLine("Invalid input!");
+                }
+                return answer.Equals("y") || answer.Equals('y');
+            }
+            return true;
+        }
+
+        public Boolean validarAns(String ans)
+        {
+            if (ans.Equals("y") || ans.Equals("n")) return true;
+            return false;
         }
     }
 }

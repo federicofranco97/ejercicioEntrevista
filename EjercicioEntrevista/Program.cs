@@ -17,7 +17,9 @@ namespace EjercicioEntrevista
             p._Surname = "Argento";
             p._Dob = "19/5/1980";
             p._MaritalStatus = true;
-            Console.WriteLine(p.ToString());
+            //Console.WriteLine(p.ToString());
+            var p2 = new Operaciones();
+            p2.cargarPersona();
         }
     }
 }

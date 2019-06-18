@@ -107,7 +107,7 @@ namespace EjercicioEntrevista
             String stat;
             if (_MaritalStatus) stat = "Married";
             else stat = "Single";
-            return "Name: " + this.FirstName + "\nSurname: " + this.Surname + "\nBorn in: " + this.Dob + "\nMarital Status: " +stat+"\nAge: "+ops.CalcularEdad(this);
+            return "Name: " + this.FirstName + "\nSurname: " + this.Surname + "\nBorn in: " + this.Dob + "\nMarital Status: " +stat+"\nEstimated Age: "+ops.CalcularEdad(this);
         }
     }
 }
