@@ -7,15 +7,38 @@ namespace EjercicioEntrevista
     {
         List<Persona> listPersona = new List<Persona>();
 
+        public void eliminarPersona()
+        {
+            int numero;
+            Console.WriteLine("Type the person number you want to delete: ");
+            while (!validarDelete(numero=Convert.ToInt32(Console.ReadLine())))
+            {
+                Console.WriteLine("Invalid parameter");
+            }
+            if (listPersona[numero]._MaritalStatus)
+            {
+                int pareja=listPersona[numero]._pareja;
+                listPersona[pareja]._pareja = -2;
+            }
+            listPersona.RemoveAt(numero);
+            Console.WriteLine("\nUser removed succesfully!\n");
+            asignarId();
+        }
+
+        public Boolean validarDelete(int numero)
+        {
+            return numero >= 0 && numero < listPersona.Count;
+        }
+
         public void mostrarPersonas()
         {
             Console.WriteLine("************");
             foreach(Persona p in listPersona)
             {
                 String parejaNombre = "";
-                if (p._pareja != -1)
+                if (p._pareja != -2)
                 {
-                    parejaNombre = (listPersona[p._pareja]._FirstName).Trim();
+                    parejaNombre = (listPersona[p._id+p._pareja]._FirstName).Trim();
                 }
                 else parejaNombre = "None in record";
                 Console.WriteLine(p.ToString()+"\nNumber: "+p._id + "\nPareja: "+ parejaNombre);
@@ -41,12 +64,16 @@ namespace EjercicioEntrevista
         public void asignarData(List<Persona> list)
         {
             listPersona.AddRange(list);
-            for(int i = 0; i < listPersona.Count; i++)
+            asignarId();
+        }
+
+        public void asignarId()
+        {
+            for (int i = 0; i < listPersona.Count; i++)
             {
                 listPersona[i]._id = i;
             }
         }
-
 
         /**
          * Metodo que pide y valida los datos para crear una persona, y si es menor de 16 descarta la data.
@@ -76,7 +103,7 @@ namespace EjercicioEntrevista
             Console.WriteLine("\nUser added succesfully!\n");
             if (casado)
             {
-                p._pareja = listPersona.Count;
+                p._pareja = 1;
                 cargarRelacion();
             }
         }
@@ -105,7 +132,7 @@ namespace EjercicioEntrevista
             }
             Boolean casado = true;
             Persona p =new Persona(nombre, apellido, fechaNac, casado);
-            p._id = listPersona.Count;
+            p._id = -1;
             listPersona.Add(p);
             Console.WriteLine("\nRelacion added succesfully!\n");
         }

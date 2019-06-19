@@ -30,7 +30,7 @@ namespace EjercicioEntrevista
             Surname = surname;
             Dob = dob;
             MaritalStatus = maritalStatus;
-            this.pareja = -1;
+            this.pareja = -2;
         }
             /**
              * Constructor por defecto
@@ -44,7 +44,7 @@ namespace EjercicioEntrevista
         {
             var persona = obj as Persona;
             return persona != null &&
-                   FirstName == persona.FirstName &&
+                   FirstName.Trim() == persona.FirstName.Trim() &&
                    Surname == persona.Surname &&
                    Dob == persona.Dob &&
                    MaritalStatus == persona.MaritalStatus;

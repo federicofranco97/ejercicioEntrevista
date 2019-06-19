@@ -8,9 +8,8 @@ namespace EjercicioEntrevista
         public Persistencia per = new Persistencia();
         private const String add="1" ;
         private const String view="2";
-        private const String modify="3";
-        private const String delete="4";
-        private const String exit = "5";
+        private const String delete="3";
+        private const String exit = "4";
 
         /**
          * Constructor vacio para poder invocar los metodos
@@ -35,7 +34,7 @@ namespace EjercicioEntrevista
         {
             Console.WriteLine("Welcome to the main menu");
             Console.WriteLine("Please select your action:");
-            String options = "1-Add a Person\n2-View all\n3-Modify a Person\n4-Delete a person\n5-Exit\n\n";
+            String options = "1-Add a Person\n2-View all\n3-Delete a person\n4-Exit\n\n";
             Console.WriteLine(options);
             String op = Console.ReadLine();
             switch (op)
@@ -49,10 +48,8 @@ namespace EjercicioEntrevista
                     Console.WriteLine();
                     menuPrincipal();
                     break;
-                case modify:
-                    menuPrincipal();
-                    break;
                 case delete:
+                    ops.eliminarPersona();
                     menuPrincipal();
                     break;
                 case exit:
