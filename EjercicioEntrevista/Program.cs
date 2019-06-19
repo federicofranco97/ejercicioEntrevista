@@ -34,7 +34,7 @@ namespace EjercicioEntrevista
         {
             Console.WriteLine("Welcome to the main menu");
             Console.WriteLine("Please select your action:");
-            String options = "1-Add a Person\n2-View all\n3-Delete a person\n4-Exit\n\n";
+            String options = "1-Add a Person\n2-View all\n3-Delete a person\n4-Save & Exit\n\n";
             Console.WriteLine(options);
             String op = Console.ReadLine();
             switch (op)

@@ -10,12 +10,25 @@ namespace EjercicioEntrevista
         public Persistencia() { }
         String rutaPersonas = "C:\\Users\\Public\\PersonasGuardadas\\Personas.txt";
 
+        /**
+         * Guarda la lista de string en el txt de la ruta
+         */
         public void guardarPersonas(List<String> list)
         {
             File.Create(@rutaPersonas).Close();
-            File.WriteAllLines(@rutaPersonas, list);
+            //File.WriteAllLines(@rutaPersonas, list);
+            using (StreamWriter sw = File.AppendText(rutaPersonas))
+            {
+                foreach (var line in list)
+                {
+                    sw.WriteLine(line);
+                }
+            }
         }
 
+        /**
+         * Lee cada linea del txt, la parsea como persona y la agrega a una lista que devuelve.
+         */
         public List<Persona> traerPersonas()
         {
             List<Persona> listAux = new List<Persona>();
@@ -38,14 +51,5 @@ namespace EjercicioEntrevista
             return listAux;
         }
 
-        public void cargarTest()
-        {
-            String data = "Marcos-Perez-12/09/1987-false";
-            String data2 = "Damian-Perez-07/09/1997-true";
-            List<String> list = new List<String>();
-            list.Add(data);
-            list.Add(data2);
-            guardarPersonas(list);
-        }
     }
 }

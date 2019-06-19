@@ -32,10 +32,11 @@ namespace EjercicioEntrevista
             MaritalStatus = maritalStatus;
             this.pareja = -2;
         }
-            /**
-             * Constructor por defecto
-             */
-            public Persona() { }
+            
+        /**
+        * Constructor por defecto
+        */
+         public Persona() { }
         
         /**
          * Override de equals para poder comparar personas.
@@ -64,6 +65,9 @@ namespace EjercicioEntrevista
             }
         }
 
+        /**
+         * Getter / setter for pareja
+         */
         public int _pareja
         {
             get
@@ -121,6 +125,9 @@ namespace EjercicioEntrevista
             }
         }
 
+        /**
+         * Getter / setter for id
+         */
         public int _id
         {
             get
@@ -134,6 +141,9 @@ namespace EjercicioEntrevista
             }
         }
 
+        /**
+         * Override de tostring para imprimir las personas
+         */
         public override string ToString()
         {
             String stat;

@@ -7,6 +7,9 @@ namespace EjercicioEntrevista
     {
         List<Persona> listPersona = new List<Persona>();
 
+        /**
+         * Toma el index de la persona en la lista y la elimina
+         */
         public void eliminarPersona()
         {
             int numero;
@@ -25,11 +28,17 @@ namespace EjercicioEntrevista
             asignarId();
         }
 
+        /**
+         * Valida el numero ingresado para eliminar persona
+         */
         public Boolean validarDelete(int numero)
         {
             return numero >= 0 && numero < listPersona.Count;
         }
 
+        /**
+         * Llama al metodo tostring y agrega datos que se buscan/calculan en esta clase
+         */
         public void mostrarPersonas()
         {
             Console.WriteLine("************");
@@ -47,6 +56,9 @@ namespace EjercicioEntrevista
             Console.WriteLine("************");
         }
 
+        /**
+         * Toma la fecha de nacimiento de una persona, y calcula la edad estimada de la misma
+         */
         public int CalcularEdad(Persona p)
         {
             String[] splitEdad = p._Dob.Split('/');
@@ -54,6 +66,9 @@ namespace EjercicioEntrevista
             return Convert.ToInt32(currentDate[2])- Convert.ToInt32(splitEdad[2]);
         }
 
+        /**
+         * Toma un string que representa la fecha de nacimiento y calcula la edad estimada
+         */
         public int CalcularEdad(String fechaNac)
         {
             String[] splitEdad = fechaNac.Split('/');
@@ -61,12 +76,19 @@ namespace EjercicioEntrevista
             return Convert.ToInt32(currentDate[2]) - Convert.ToInt32(splitEdad[2]);
         }
 
+        /**
+         * Toma la lista de personas cargada del txt y la agrega a la lista de personas del main
+         * recorre la lista y a cda persona le agrega un id
+         */
         public void asignarData(List<Persona> list)
         {
             listPersona.AddRange(list);
             asignarId();
         }
 
+        /**
+         * recorre la lista de personas y asigna su posicion como id
+         */
         public void asignarId()
         {
             for (int i = 0; i < listPersona.Count; i++)
@@ -272,6 +294,9 @@ namespace EjercicioEntrevista
             return edad < 16;
         }
 
+        /**
+         * Si es menor de 18 pide autorizacion
+         */
         public Boolean autorizarMenor(String fechaNac)
         {
             int edad = CalcularEdad(fechaNac);
@@ -288,6 +313,9 @@ namespace EjercicioEntrevista
             return true;
         }
 
+        /**
+         * Verifica que la autorizacion sea valida
+         */
         public Boolean validarAns(String ans)
         {
             if (ans.Equals("y") || ans.Equals("n")) return true;
