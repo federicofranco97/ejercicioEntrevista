@@ -9,7 +9,6 @@ namespace EjercicioEntrevista
     {
         public Persistencia() { }
         String rutaPersonas = "C:\\Users\\Public\\PersonasGuardadas\\Personas.txt";
-        String rutaRelaciones = "C:\\Users\\Public\\PersonasGuardadas\\Relaciones.txt";
 
         public void guardarPersonas(List<String> list)
         {
@@ -17,12 +16,6 @@ namespace EjercicioEntrevista
             File.WriteAllLines(@rutaPersonas, list);
         }
 
-        public void guardarRelaciones(List<String> list)
-        {
-            File.Create(@rutaRelaciones).Close();
-            File.WriteAllLines(@rutaRelaciones, list);
-        }
-        
         public List<Persona> traerPersonas()
         {
             List<Persona> listAux = new List<Persona>();
@@ -43,12 +36,6 @@ namespace EjercicioEntrevista
                 listAux.Add(p);
             }
             return listAux;
-        }
-
-        public String traerRelaciones()
-        {
-            string contents = File.ReadAllText(@rutaRelaciones);
-            return contents;
         }
 
         public void cargarTest()
