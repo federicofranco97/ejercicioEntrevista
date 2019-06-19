@@ -12,7 +12,14 @@ namespace EjercicioEntrevista
             Console.WriteLine("************");
             foreach(Persona p in listPersona)
             {
-                Console.WriteLine(p.ToString()+"\nNumero: "+listPersona.IndexOf(p) + "\n");
+                String parejaNombre = "";
+                if (p._pareja != -1)
+                {
+                    parejaNombre = (listPersona[p._pareja]._FirstName).Trim();
+                }
+                else parejaNombre = "None in record";
+                Console.WriteLine(p.ToString()+"\nNumber: "+p._id + "\nPareja: "+ parejaNombre);
+                
             }
             Console.WriteLine("************");
         }
@@ -34,6 +41,10 @@ namespace EjercicioEntrevista
         public void asignarData(List<Persona> list)
         {
             listPersona.AddRange(list);
+            for(int i = 0; i < listPersona.Count; i++)
+            {
+                listPersona[i]._id = i;
+            }
         }
 
 
@@ -59,19 +70,55 @@ namespace EjercicioEntrevista
                 return;
             }
             Boolean casado = pedirMaritalStatus();
-            listPersona.Add(new Persona(nombre, apellido, fechaNac, casado));
+            Persona p = new Persona(nombre, apellido, fechaNac, casado);
+            p._id = listPersona.Count;
+            listPersona.Add(p);
             Console.WriteLine("\nUser added succesfully!\n");
+            if (casado)
+            {
+                p._pareja = listPersona.Count;
+                cargarRelacion();
+            }
+        }
+
+        /**
+         * Metodo que pide y valida los datos para crear una persona, y si es menor de 16 descarta la data.
+         * Si es menor que 18 pide confirmacion
+         * */
+        public void cargarRelacion()
+        {
+            Console.WriteLine("\nPlease add partner\n");
+            String nombre = pedirNombre();
+            String apellido = pedirApellido();
+            String fechaNac = pedirFechaNac();
+            if (blockearMenores(fechaNac))
+            {
+                Console.WriteLine("The user you are trying to create is under the age of 16, \n" +
+                    "therefore cannot be created.\n");
+                return;
+            }
+
+            if (!autorizarMenor(fechaNac))
+            {
+                Console.WriteLine("Your parents do not authorize the creation of this profile.");
+                return;
+            }
+            Boolean casado = true;
+            Persona p =new Persona(nombre, apellido, fechaNac, casado);
+            p._id = listPersona.Count;
+            listPersona.Add(p);
+            Console.WriteLine("\nRelacion added succesfully!\n");
         }
 
         /**
          * Metodo que convierte la lista de personas en una lista de strings
          */
-         public List<String> convertirPersonas()
+        public List<String> convertirPersonas()
         {
             List<String> listAux = new List<String>();
             foreach(Persona p in listPersona)
             {
-                String aux = p._FirstName + "-" + p._Surname + "-" + p._Dob + "-" + p._MaritalStatus+"*\n";
+                String aux = p._FirstName + "?" + p._Surname + "?" + p._Dob + "?" + p._MaritalStatus+"?"+p._pareja+"*\n";
                 listAux.Add(aux);
             }
             return listAux;

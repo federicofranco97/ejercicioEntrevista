@@ -36,10 +36,10 @@ namespace EjercicioEntrevista
             foreach (String s in aux)
             {
                 if (s.Equals(" ")) break;
-                String s2 = s.Replace(" ","");
-                String []aux2 = s2.Split('-');
-                if (aux2.Length != 4) break;
-                Persona p = new Persona(aux2[0], aux2[1], aux2[2], Convert.ToBoolean(aux2[3].ToLower()));
+                String s2 = s.Replace("\n","");
+                String []aux2 = s2.Split('?');
+                if (aux2.Length != 5) break;
+                Persona p = new Persona(aux2[0], aux2[1], aux2[2], Convert.ToBoolean(aux2[3].ToLower()),Convert.ToInt32(aux2[4]));
                 listAux.Add(p);
             }
             return listAux;

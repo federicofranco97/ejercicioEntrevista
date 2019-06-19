@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace EjercicioEntrevista
 {
@@ -12,27 +8,38 @@ namespace EjercicioEntrevista
         private String Surname;
         private String Dob;//date of birth
         private Boolean MaritalStatus;// if true married, otherwise single.
+        private int id;
+        private int pareja;
         private Operaciones ops = new Operaciones();
+        
         /**
          * Constructor con parametros
          */
+        public Persona(string firstName, string surname, string dob, bool maritalStatus,int pareja)
+        {
+            FirstName = firstName;
+            Surname = surname;
+            Dob = dob;
+            MaritalStatus = maritalStatus;
+            this.pareja = pareja;
+        }
+
         public Persona(string firstName, string surname, string dob, bool maritalStatus)
         {
             FirstName = firstName;
             Surname = surname;
             Dob = dob;
             MaritalStatus = maritalStatus;
+            this.pareja = -1;
         }
-
-        /**
-         * Constructor por defecto
-         */
-        public Persona() { }
+            /**
+             * Constructor por defecto
+             */
+            public Persona() { }
         
         /**
          * Override de equals para poder comparar personas.
          */
-         
         public override bool Equals(object obj)
         {
             var persona = obj as Persona;
@@ -54,6 +61,18 @@ namespace EjercicioEntrevista
             set
             {
                 this.FirstName = value;
+            }
+        }
+
+        public int _pareja
+        {
+            get
+            {
+                return this.pareja;
+            }
+            set
+            {
+                this.pareja = value;
             }
         }
 
@@ -102,12 +121,25 @@ namespace EjercicioEntrevista
             }
         }
 
+        public int _id
+        {
+            get
+            {
+                return this.id;
+            }
+
+            set
+            {
+                this.id = value;
+            }
+        }
+
         public override string ToString()
         {
             String stat;
             if (_MaritalStatus) stat = "Married";
             else stat = "Single";
-            return "Name: " + this.FirstName + "\nSurname: " + this.Surname + "\nBorn in: " + this.Dob + "\nMarital Status: " +stat+"\nEstimated Age: "+ops.CalcularEdad(this);
+            return "\nName: " + _FirstName.Trim() + "\nSurname: " + _Surname + "\nBorn in: " + _Dob + "\nMarital Status: " +stat+"\nEstimated Age: "+ops.CalcularEdad(this);
         }
     }
 }
